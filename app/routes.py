@@ -16,3 +16,9 @@ def create_post():
         posts.append({'title': title, 'content': content})
         return redirect(url_for('main.index'))
     return render_template('create_post.html')
+
+@main.route('/delete/<int:post_id>')
+def delete_post(post_id):
+    if 0 <= post_id < len(posts):
+        posts.pop(post_id)
+    return redirect(url_for('main.index'))
