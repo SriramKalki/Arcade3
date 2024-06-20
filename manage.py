@@ -1,9 +1,14 @@
-from flask import Flask
-from flask_migrate import Migrate
-from app import create_app, db
+from app import create_app
+from app.models import db
+from flask_migrate import MigrateCommand
+from flask_script import Manager
 
 app = create_app()
-migrate = Migrate(app, db)
+manager = Manager(app)
+
+@manager.command
+def run():
+    app.run(debug=True)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    manager.run()
